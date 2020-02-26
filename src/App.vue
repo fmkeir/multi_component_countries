@@ -2,14 +2,14 @@
   <div id="app">
     <h1>Countries EventBus trip</h1>
     <div class="main-container">
-      <countries-list :countries="countries" class="contained"></countries-list>
-      <country-detail :country="selectedCountry" class="contained"></country-detail>
+      <countries-select :countries="countries" class="contained"></countries-select>
+      <country-detail :country="selectedCountry" class="contained" v-if="selectedCountry"></country-detail>
     </div>
   </div>
 </template>
 
 <script>
-import CountriesList from './components/CountriesList';
+import CountriesSelect from './components/CountriesSelect';
 import CountryDetail from './components/CountryDetail';
 import {eventBus} from './main.js';
 
@@ -31,7 +31,7 @@ export default {
     })
   },
   components: {
-    "countries-list": CountriesList,
+    "countries-select": CountriesSelect,
     "country-detail": CountryDetail
   }
 }

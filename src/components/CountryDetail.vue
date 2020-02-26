@@ -23,6 +23,5 @@ div {
   border-radius: 1em;
   position: fixed;
   right: 20%;
-  top: 250px;
 }
 </style>
