@@ -2,7 +2,8 @@
   <div id="app">
     <h1>Countries EventBus trip</h1>
     <div class="main-container">
-      <countries-select :countries="countries" class="contained"></countries-select>
+      <input type="text" v-model="search" placeholder="Filter countries...">
+      <countries-select :countries="filteredCountries" class="contained"></countries-select>
       <country-detail :country="selectedCountry" class="contained" v-if="selectedCountry"></country-detail>
     </div>
   </div>
@@ -18,7 +19,8 @@ export default {
   data(){
     return {
       countries: [],
-      selectedCountry: null
+      selectedCountry: null,
+      search: ''
     }
   },
   mounted(){
@@ -29,6 +31,13 @@ export default {
     eventBus.$on('selected-country', (country) => {
       this.selectedCountry = country
     })
+  },
+  computed: {
+    filteredCountries: function(){
+      return this.countries.filter(country => {
+        return country.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
   },
   components: {
     "countries-select": CountriesSelect,
@@ -58,6 +67,10 @@ export default {
     text-align: center;
     margin-bottom: 1em;
     font-size: 60px;
+  }
+
+  input {
+    margin-right: 1em;
   }
 
   .contained {
